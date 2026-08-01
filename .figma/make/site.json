@@ -1,0 +1,11 @@
+{
+  "title": "SOLF.gg",
+  "description": "Enhance gaming experiences with a premium UI/HUD that offers intuitive navigation, immersive visuals, and customizable features for players and developers.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

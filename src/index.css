@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Interface palette — keyed to the electric neon-green / near-black logo */
+  --color-brand: #44ef14;
+  --color-brand-dim: #1d6608;
+  --color-brand-ink: #031200;
+  --color-bg: #080a07;
+  --color-bg2: #0c1009;
+  --color-panel: #101610;
+  --color-line: #1a2816;
+  --color-fg: #d2e8cc;
+  --color-dim: #5a7854;
+  --color-gold: #ffcc55;
+  --color-red: #ff5f57;
+
+  /* Gameplay-critical */
+  --color-ball-you: #ffffff;
+  --color-ball-opp: #6bb6ff;
+  --color-water: #2a6fb0;
+
+  /* 3D course environment — richer, deeper greens to match the logo palette */
+  --color-sky: #060908;
+  --color-fairway: #2b6432;
+  --color-rough: #1f4a26;
+  --color-wall: #354540;
+  --color-walltop: #4a5c52;
+  --color-cup: #090d0a;
+  --color-slope: #38743f;
+  --color-sand: #c8b070;
+  --color-bumper: #44ef14;
+
+  --font-display: 'Chakra Petch', system-ui, sans-serif;
+  --font-body: 'Sora', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    background-image:
+      radial-gradient(80% 60% at 50% -10%, rgba(68, 239, 20, 0.12), transparent 60%),
+      radial-gradient(50% 40% at 50% -5%, rgba(68, 239, 20, 0.06), transparent 45%),
+      radial-gradient(60% 50% at 100% 100%, rgba(42, 111, 176, 0.05), transparent 60%),
+      radial-gradient(100% 70% at 50% 120%, rgba(68, 239, 20, 0.05), transparent 55%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-brand-ink);
+  }
+  /* Hide scrollbars until scrolling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  *:hover {
+    scrollbar-color: var(--color-line) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 8px;
+  }
+  *:hover::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+  }
+}
+
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* ── Premium material system ─────────────────────────────────────────────
+   A "surface" is a raised panel: a soft top-lit gradient, a hairline ring,
+   a 1px inner highlight along the top edge, and a deep ambient shadow. This
+   is the single treatment that makes every panel read as machined hardware
+   rather than a flat div. */
+@utility surface {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-panel) 92%, white) 0%, var(--color-bg2) 46%, var(--color-bg2) 100%);
+  border: 1px solid var(--color-line);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.015),
+    0 20px 50px -18px rgba(0, 0, 0, 0.75);
+}
+
+/* Frosted variant for HUD chrome that floats over the live 3D course. */
+@utility glass {
+  background:
+    linear-gradient(180deg, rgba(18, 28, 16, 0.82) 0%, rgba(9, 14, 8, 0.76) 100%);
+  backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(68, 239, 20, 0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0 0 1px rgba(68, 239, 20, 0.04),
+    0 14px 40px rgba(0, 0, 0, 0.65);
+}
+
+/* The primary brand button: a crisp lit-green pill. Depth comes from a bright
+   top highlight and a soft grounded shadow — not a neon halo. Hover just lifts
+   it a touch and warms the surface. */
+@utility btn-brand {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-brand) 88%, white), var(--color-brand) 48%, color-mix(in srgb, var(--color-brand) 82%, black));
+  color: var(--color-brand-ink);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 60%, black),
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 6px 16px -8px rgba(0, 0, 0, 0.55);
+  transition: filter 0.18s ease, box-shadow 0.18s ease, transform 0.08s ease;
+}
+@utility btn-brand-hover {
+  filter: brightness(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-brand) 70%, black),
+    0 3px 6px rgba(0, 0, 0, 0.32),
+    0 10px 28px -8px color-mix(in srgb, var(--color-brand) 55%, transparent);
+}
+
+/* Field grid backdrop used behind marketing + lobby surfaces */
+@utility field-grid {
+  background-image:
+    linear-gradient(to right, rgba(68, 239, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(68, 239, 20, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@keyframes pulse-crit {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.06); }
+}
+@keyframes hud-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  12% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.02); }
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sheen {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
